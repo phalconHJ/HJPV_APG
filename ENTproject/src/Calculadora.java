@@ -5,27 +5,25 @@ public class Calculadora {
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Introduzca dos numeros");
+		System.out.println("Introduzca la operacion \nNumero1     Enter\n(+ - * / ^) Enter\nNumero2     Enter");
 		int N1 = sc.nextInt();
+		char operador = sc.next().charAt(0);
 		int N2 = sc.nextInt();
 
-		System.out.println("Que quieres Hacer? 1)Sumarlos 2)Restarlos 3)Multiplicarlos 4)Dividirlos ");
-		int selector = sc.nextInt();
-		sc.close();
-		switch (selector) {
-			case 1:
+		switch (operador){
+			case '+':
 				int sumar = Suma(N1,N2);
 				System.out.println(sumar);
 				break;
-			case 2:
+			case '-':
 				int restar = Resta(N1,N2);
 				System.out.println(restar);	
 				break;
-			case 3:
+			case '*':
 				int multiplicar = Multiplicacion(N1,N2);
 				System.out.println(multiplicar);	
 				break;
-			case 4:
+			case '/':
 				if(N2==0) {
 					if (N1==0) {
 						System.out.println("Infinito");
@@ -42,8 +40,17 @@ public class Calculadora {
 					resto=N1-num;
 					System.out.println("Cociente " + dividir + " resto " + resto);
 				}
-			break;
+				break;
+			case '^':
+				int Potenciar = Potencia(N1,N2);
+				System.out.println(Potenciar);
+				break;
+			default:
+				System.out.println("ERROR");
+				break;
 		}
+		
+		sc.close();
 	}
 
 	public static int Suma(int S, int s) {
@@ -69,13 +76,12 @@ public class Calculadora {
 	public static int Multiplicacion(int M, int m) {
 
 		int res=0;
-		int cont= 0;
 		int x=M;
 		int y=m;	
 		
-		while(cont<y) {
+		while(0<y) {
 			res=res+x;
-			cont++;
+			y--;
 		}
 		
 		return res;
@@ -94,4 +100,16 @@ public class Calculadora {
 		return res;
 	}
 	
+	public static int Potencia(int P, int p) {
+		int res=P;
+		int x=P;
+		int y=p;
+													//exponente				2		3			4
+		while(y>1) {								//numero de vueltas		1		2			3
+			y--;
+			res = Multiplicacion(res,x);			//res=res*x				P*P		(P*P)*P		((P*P)*P)*P
+		}
+		
+		return res;
+	}
 }
