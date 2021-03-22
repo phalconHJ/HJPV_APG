@@ -5,53 +5,69 @@ public class Calculadora {
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Introduzca la operacion \nNumero1     Enter\n(+ - * / ^) Enter\nNumero2     Enter");
-		int N1 = sc.nextInt();
-		char operador = sc.next().charAt(0);
-		int N2 = sc.nextInt();
+		String salir = "s";
+		
+		while(salir.equals("s")) {
+			
+			System.out.println("Introduzca la operacion \nNumero1     Enter\n(+ - * / ^) Enter\nNumero2     Enter");
+			int N1 = sc.nextInt();
+			char operador = sc.next().charAt(0);
+			int N2 = sc.nextInt();
 
-		switch (operador){
-			case '+':
-				int sumar = Suma(N1,N2);
-				System.out.println(sumar);
-				break;
-			case '-':
-				int restar = Resta(N1,N2);
-				System.out.println(restar);	
-				break;
-			case '*':
-				int multiplicar = Multiplicacion(N1,N2);
-				System.out.println(multiplicar);	
-				break;
-			case '/':
-				if(N2==0) {
-					if (N1==0) {
-						System.out.println("Infinito");
+			
+			switch (operador){
+				case '+':
+					int sumar = Suma(N1,N2);
+					System.out.println("Suma: " + N1 + " + " + N2 + " = " + sumar);
+					break;
+				case '-':
+					int restar = Resta(N1,N2);
+					System.out.println("Resta: " + N1 + " - " + N2 + " = " + restar);	
+					break;
+				case '*':
+					int multiplicar = Multiplicacion(N1,N2);
+					System.out.println("Multiplicación: " + N1 + " x " + N2 + " = " + multiplicar);	
+					break;
+				case '/':
+					if(N2==0) {
+						if (N1==0) {
+							System.out.println("Infinito");
+						}
+						else {
+							System.out.println("Indefinido");
+						}
 					}
 					else {
-						System.out.println("Indefinido");
+						int resto;
+						int num;
+						int dividir = Division(N1,N2);
+						num=N2*dividir;
+						resto=N1-num;
+						System.out.println("División: Cociente " + dividir + " resto " + resto);
 					}
-				}
-				else {
-					int resto;
-					int num;
-					int dividir = Division(N1,N2);
-					num=N2*dividir;
-					resto=N1-num;
-					System.out.println("Cociente " + dividir + " resto " + resto);
-				}
-				break;
-			case '^':
-				int Potenciar = Potencia(N1,N2);
-				System.out.println(Potenciar);
-				break;
-			default:
-				System.out.println("ERROR");
-				break;
-		}
+					break;
+				case '^':
+					int Potenciar = Potencia(N1,N2);
+					System.out.println(Potenciar);
+					break;
+				default:
+					System.out.println("ERROR");
+					break;
+					
+			} // switch
+			
+			System.out.println("¿Desea continuar?[s/n]");
+			salir = sc.next();
+			if(salir.equals("n")) break;
+			
+		} // while
+		
+		System.out.println("**SALIÓ DEL PROGRAMA**");
+		
+		
 		
 		sc.close();
-	}
+	} // main
 
 	public static int Suma(int S, int s) {
 		int res=0;
@@ -104,10 +120,10 @@ public class Calculadora {
 		int res=P;
 		int x=P;
 		int y=p;
-													//exponente				2		3			4
-		while(y>1) {								//numero de vueltas		1		2			3
+													
+		while(y>1) {								
 			y--;
-			res = Multiplicacion(res,x);			//res=res*x				P*P		(P*P)*P		((P*P)*P)*P
+			res = Multiplicacion(res,x);			
 		}
 		
 		return res;
